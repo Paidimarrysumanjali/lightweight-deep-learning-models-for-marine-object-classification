@@ -1,0 +1,6 @@
+torch
+torchvision
+Flask
+Pillow
+numpy
+opencv-python-headless # For drawing boxes in memory, good for deployment
