@@ -1,0 +1,229 @@
+/* your_project_root/app/static/style.css */
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif; /* A slightly more modern font */
+    background-color: #1a1a2e; /* Dark blue-purple background */
+    color: #e0e0e0; /* Light grey text */
+    margin: 0;
+    padding: 30px; /* Increased padding around the entire content */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align content to the top */
+    min-height: 100vh;
+    box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+.container {
+    background-color: #0f3460; /* Slightly lighter dark blue for the main container */
+    padding: 40px; /* More generous padding inside the container */
+    border-radius: 12px; /* Slightly more rounded corners */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* More pronounced shadow */
+    max-width: 1400px; /* Allow container to be wider */
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    color: #e94560; /* Vibrant red/pink for main headings */
+    font-size: 2.8em; /* Larger main title */
+    margin-bottom: 25px; /* More space below h1 */
+    font-weight: 700; /* Bolder */
+}
+
+h2 {
+    color: #e94560;
+    font-size: 2em; /* Larger subheading */
+    margin-top: 40px; /* More space above h2 */
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+p {
+    color: #cccccc;
+    line-height: 1.6;
+    margin-bottom: 10px; /* Add some margin below paragraphs */
+}
+
+.upload-form {
+    margin: 40px 0; /* More vertical space around the form */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Increased gap between file input and button */
+}
+
+.upload-form input[type="file"] {
+    padding: 12px; /* Slightly more padding */
+    border: 1px solid #533483;
+    border-radius: 8px; /* Softer border radius */
+    background-color: #2e1a47;
+    color: #e0e0e0;
+    width: 100%;
+    max-width: 450px; /* Slightly wider input */
+    font-size: 1.05em; /* Slightly larger font */
+    cursor: pointer; /* Indicate it's clickable */
+}
+
+.upload-form button {
+    background-color: #e94560;
+    color: white;
+    padding: 14px 30px; /* Larger button */
+    border: none;
+    border-radius: 8px; /* Softer border radius */
+    cursor: pointer;
+    font-size: 1.1em; /* Larger font */
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform for hover */
+}
+
+.upload-form button:hover {
+    background-color: #c73650; /* Darker red on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+.flashes {
+    list-style-type: none;
+    padding: 15px; /* More padding */
+    margin: 25px 0; /* More vertical margin */
+    color: #ffcc00; /* Warning color */
+    background-color: rgba(255, 204, 0, 0.1); /* Subtle background for flashes */
+    border: 1px solid #ffcc00;
+    border-radius: 8px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.flashes li {
+    margin-bottom: 5px;
+}
+
+.image-display {
+    margin-bottom: 40px; /* More space below the original image */
+}
+
+.image-display img {
+    max-width: 650px; /* Restrict max width of original image */
+    max-height: 450px; /* Restrict max height of original image */
+    width: auto; /* Allow width to adjust based on max-width */
+    height: auto; /* Allow height to adjust based on max-height */
+    object-fit: contain; /* Ensure image fits without cropping or stretching */
+    border: 3px solid #533483; /* Thicker, prominent border */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease; /* Smooth transition for potential hover effects */
+}
+/* Optional: Hover effect for original image */
+.image-display img:hover {
+    transform: scale(1.01);
+}
+
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted min-width for cards */
+    gap: 30px; /* Increased gap between result cards */
+    margin-top: 30px;
+    padding: 0 20px; /* Add some horizontal padding to the grid itself */
+}
+
+.model-card {
+    background-color: #16213e; /* Darker blue for card background */
+    padding: 30px; /* More padding inside cards */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center; /* Center content within the card */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth transitions */
+}
+
+.model-card:hover {
+    transform: translateY(-8px); /* Lift card on hover */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6); /* More prominent shadow on hover */
+}
+
+.model-card h3 {
+    color: #533483; /* Purple accent for model names */
+    font-size: 1.5em; /* Larger model name */
+    margin-top: 0;
+    margin-bottom: 18px; /* More space below model name */
+    font-weight: 600;
+}
+
+.model-card p {
+    margin: 8px 0; /* Adjusted margin for prediction/confidence lines */
+    font-size: 1.1em; /* Slightly larger text in cards */
+}
+
+.model-card .prediction {
+    font-weight: bold;
+    color: #00bcd4; /* Cyan color */
+    font-size: 1.2em; /* Make prediction stand out more */
+}
+
+.model-card .confidence {
+    font-weight: bold;
+    color: #8bc34a; /* Green color */
+    font-size: 1.15em; /* Make confidence stand out more */
+}
+
+.model-card .error {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.processed-image {
+    margin-top: 25px; /* More space above the processed image */
+    width: 100%;
+    max-width: 280px; /* Smaller max-width for processed images within cards */
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    border: 2px dashed #e94560; /* Clearer dashed border */
+    border-radius: 8px; /* Rounded corners for processed image */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.processed-image img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Remove extra space below image */
+    border-radius: 6px; /* Slightly smaller border-radius than container */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    .container {
+        padding: 25px;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.6em;
+    }
+    .upload-form input[type="file"],
+    .upload-form button {
+        max-width: 100%;
+        font-size: 1em;
+    }
+    .results-grid {
+        grid-template-columns: 1fr; /* Stack cards vertically on smaller screens */
+        padding: 0;
+    }
+    .image-display img {
+        max-width: 100%; /* Allow original image to take full width on small screens */
+    }
+    .model-card h3 {
+        font-size: 1.3em;
+    }
+    .model-card p {
+        font-size: 1em;
+    }
+}

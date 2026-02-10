@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marine Object Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Marine Object Classifier</h1>
+        <p>Upload an image of a marine object (Dolphin, Fish, Lobster, Octopus, Sea_horse) to classify it using multiple lightweight models.</p>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" enctype="multipart/form-data" class="upload-form">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">Classify Image</button>
+        </form>
+
+        {% if original_img %}
+            <h2>Original Image:</h2>
+            <div class="image-display">
+                <img src="data:image/jpeg;base64,{{ original_img }}" alt="Uploaded Image">
+            </div>
+
+            <h2>Classification Results:</h2>
+            <div class="results-grid">
+                {% for model_name, result in results.items() %}
+                    <div class="model-card">
+                        <h3>{{ model_name }}</h3>
+                        {% if "error" in result %}
+                            <p class="error">{{ result.error }}</p>
+                        {% else %}
+                            <p><strong>Prediction:</strong> <span class="prediction">{{ result.prediction }}</span></p>
+                            <p><strong>Confidence:</strong> <span class="confidence">{{ result.confidence }}</span></p>
+                        {% endif %}
+                        
+                        <div class="processed-image">
+                            {% if processed_images[model_name] and "Error" not in processed_images[model_name] %}
+                                <img src="data:image/jpeg;base64,{{ processed_images[model_name] }}" alt="{{ model_name }} Prediction">
+                            {% else %}
+                                <p class="error">Could not display processed image.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
