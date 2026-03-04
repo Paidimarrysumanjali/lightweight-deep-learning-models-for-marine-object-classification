@@ -1,229 +1,371 @@
-/* your_project_root/app/static/style.css */
+* --- Global Styles & Body --- */
+:root {
+    --primary-bg: #121212; /* Darkest background */
+    --secondary-bg: #1e1e1e; /* Slightly lighter background for cards/containers */
+    --accent-color: #00bcd4; /* Cyan/Teal for highlights */
+    --text-color-light: #e0e0e0; /* Light text */
+    --text-color-dark: #bbbbbb; /* Slightly darker text for less important info */
+    --header-color: #bb86fc; /* Purple for main headers */
+    --error-color: #cf6679; /* Red for errors */
+    --success-color: #66bb6a; /* Green for success */
+    --border-color-subtle: #3a3a3a; /* Subtle border for separation */
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --hover-shadow-color: rgba(0, 0, 0, 0.8);
+    --border-radius-large: 12px;
+    --border-radius-medium: 8px;
+}
 
 body {
-    font-family: 'Segoe UI', Arial, sans-serif; /* A slightly more modern font */
-    background-color: #1a1a2e; /* Dark blue-purple background */
-    color: #e0e0e0; /* Light grey text */
+    font-family: 'Roboto', sans-serif; /* Modern, clean font */
+    background-color: var(--primary-bg);
+    color: var(--text-color-light);
     margin: 0;
-    padding: 30px; /* Increased padding around the entire content */
+    padding: 20px;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align content to the top */
+    align-items: flex-start;
     min-height: 100vh;
-    box-sizing: border-box; /* Include padding in element's total width and height */
+    box-sizing: border-box;
+    line-height: 1.6;
+    background-image: radial-gradient(circle at top left, #1a1a2e 0%, #121212 50%, #0f0f1c 100%); /* Subtle gradient background */
 }
 
+/* --- Main Container --- */
 .container {
-    background-color: #0f3460; /* Slightly lighter dark blue for the main container */
-    padding: 40px; /* More generous padding inside the container */
-    border-radius: 12px; /* Slightly more rounded corners */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* More pronounced shadow */
-    max-width: 1400px; /* Allow container to be wider */
+    background-color: var(--secondary-bg);
+    padding: 40px 30px; /* Adjusted padding */
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 8px 25px var(--shadow-color); /* Enhanced shadow */
+    max-width: 1200px;
     width: 100%;
     text-align: center;
+    border: 1px solid var(--border-color-subtle); /* Subtle border for definition */
 }
 
+/* --- Headings --- */
 h1 {
-    color: #e94560; /* Vibrant red/pink for main headings */
-    font-size: 2.8em; /* Larger main title */
-    margin-bottom: 25px; /* More space below h1 */
-    font-weight: 700; /* Bolder */
+    color: var(--header-color);
+    font-size: 3.2em; /* Larger, more impactful main title */
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: 0.05em; /* Spacing for impact */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 h2 {
-    color: #e94560;
-    font-size: 2em; /* Larger subheading */
-    margin-top: 40px; /* More space above h2 */
-    margin-bottom: 20px;
+    color: var(--accent-color);
+    font-size: 2.2em; /* Clear subheading */
+    margin-top: 50px; /* More space above */
+    margin-bottom: 25px;
     font-weight: 600;
 }
 
-p {
-    color: #cccccc;
-    line-height: 1.6;
-    margin-bottom: 10px; /* Add some margin below paragraphs */
+h3 { /* For model names in cards */
+    color: var(--header-color);
+    font-size: 1.6em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
 }
 
+/* --- Paragraphs & Descriptions --- */
+p {
+    color: var(--text-color-dark);
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.description-text {
+    max-width: 700px;
+    margin: 0 auto 40px auto; /* Centered with more space below */
+    font-size: 1.1em;
+    color: var(--text-color-light);
+}
+
+/* --- Upload Form --- */
 .upload-form {
-    margin: 40px 0; /* More vertical space around the form */
+    margin: 50px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px; /* Increased gap between file input and button */
-}
-
-.upload-form input[type="file"] {
-    padding: 12px; /* Slightly more padding */
-    border: 1px solid #533483;
-    border-radius: 8px; /* Softer border radius */
-    background-color: #2e1a47;
-    color: #e0e0e0;
-    width: 100%;
-    max-width: 450px; /* Slightly wider input */
-    font-size: 1.05em; /* Slightly larger font */
-    cursor: pointer; /* Indicate it's clickable */
-}
-
-.upload-form button {
-    background-color: #e94560;
-    color: white;
-    padding: 14px 30px; /* Larger button */
-    border: none;
-    border-radius: 8px; /* Softer border radius */
-    cursor: pointer;
-    font-size: 1.1em; /* Larger font */
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform for hover */
-}
-
-.upload-form button:hover {
-    background-color: #c73650; /* Darker red on hover */
-    transform: translateY(-2px); /* Slight lift effect */
-}
-
-.flashes {
-    list-style-type: none;
-    padding: 15px; /* More padding */
-    margin: 25px 0; /* More vertical margin */
-    color: #ffcc00; /* Warning color */
-    background-color: rgba(255, 204, 0, 0.1); /* Subtle background for flashes */
-    border: 1px solid #ffcc00;
-    border-radius: 8px;
-    max-width: 600px;
+    gap: 25px; /* Increased space between elements */
+    background-color: var(--primary-bg); /* Darker background for the form itself */
+    padding: 30px;
+    border-radius: var(--border-radius-large);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5); /* Inner shadow for depth */
+    border: 1px solid var(--border-color-subtle);
+    max-width: 500px;
     margin-left: auto;
     margin-right: auto;
 }
-.flashes li {
-    margin-bottom: 5px;
+
+.upload-form input[type="file"] {
+    padding: 12px 15px;
+    border: 1px solid var(--accent-color); /* Accent color border */
+    border-radius: var(--border-radius-medium);
+    background-color: var(--secondary-bg);
+    color: var(--text-color-light);
+    width: 100%;
+    max-width: 400px;
+    font-size: 1.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
+.upload-form input[type="file"]::-webkit-file-upload-button {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+.upload-form input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: #008c9f;
+}
+
+.upload-form button {
+    background: linear-gradient(45deg, var(--accent-color), #00bcd4); /* Gradient button */
+    color: white;
+    padding: 15px 35px;
+    border: none;
+    border-radius: var(--border-radius-medium);
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    letter-spacing: 0.03em;
+    transition: all 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 188, 212, 0.3); /* Shadow matching accent */
+}
+
+.upload-form button:hover {
+    background: linear-gradient(45deg, #008c9f, var(--accent-color)); /* Darker gradient on hover */
+    transform: translateY(-3px); /* More pronounced lift */
+    box-shadow: 0 6px 15px rgba(0, 188, 212, 0.5);
+}
+
+/* --- Flash Messages --- */
+.flashes {
+    list-style-type: none;
+    padding: 15px 25px;
+    margin: 30px 0;
+    color: var(--error-color);
+    background-color: rgba(207, 102, 121, 0.1); /* Subtle red background */
+    border: 1px solid var(--error-color);
+    border-radius: var(--border-radius-medium);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.05em;
+    font-weight: 500;
+}
+.flashes li {
+    margin-bottom: 8px;
+    color: var(--error-color);
+}
+.flashes li:last-child {
+    margin-bottom: 0;
+}
+
+
+/* --- Original Image Display --- */
 .image-display {
-    margin-bottom: 40px; /* More space below the original image */
+    margin-bottom: 50px;
+    padding: 15px;
+    background-color: var(--primary-bg); /* Darker background for image frame */
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color-subtle);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .image-display img {
-    max-width: 650px; /* Restrict max width of original image */
-    max-height: 450px; /* Restrict max height of original image */
-    width: auto; /* Allow width to adjust based on max-width */
-    height: auto; /* Allow height to adjust based on max-height */
-    object-fit: contain; /* Ensure image fits without cropping or stretching */
-    border: 3px solid #533483; /* Thicker, prominent border */
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease; /* Smooth transition for potential hover effects */
+    max-width: 100%;
+    max-height: 500px; /* Constrain height more */
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border: 2px solid var(--accent-color); /* Accent border around image itself */
+    border-radius: var(--border-radius-medium);
+    transition: transform 0.3s ease;
 }
-/* Optional: Hover effect for original image */
 .image-display img:hover {
-    transform: scale(1.01);
+    transform: scale(1.02); /* Slight zoom on hover */
 }
 
 
+/* --- Results Grid & Cards --- */
 .results-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted min-width for cards */
-    gap: 30px; /* Increased gap between result cards */
-    margin-top: 30px;
-    padding: 0 20px; /* Add some horizontal padding to the grid itself */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Auto-fit columns */
+    gap: 30px; /* Generous gap between cards */
+    margin-top: 40px;
+    padding: 0 20px;
 }
 
 .model-card {
-    background-color: #16213e; /* Darker blue for card background */
-    padding: 30px; /* More padding inside cards */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    text-align: center; /* Center content within the card */
+    background: linear-gradient(145deg, var(--secondary-bg), #1a1a2e); /* Subtle gradient for cards */
+    padding: 30px;
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content horizontally */
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth transitions */
+    align-items: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    border: 1px solid var(--border-color-subtle); /* Initial subtle border */
 }
 
 .model-card:hover {
-    transform: translateY(-8px); /* Lift card on hover */
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6); /* More prominent shadow on hover */
-}
-
-.model-card h3 {
-    color: #533483; /* Purple accent for model names */
-    font-size: 1.5em; /* Larger model name */
-    margin-top: 0;
-    margin-bottom: 18px; /* More space below model name */
-    font-weight: 600;
+    transform: translateY(-10px); /* More significant lift on hover */
+    box-shadow: 0 15px 35px var(--hover-shadow-color); /* Stronger shadow on hover */
+    border-color: var(--accent-color); /* Highlight border on hover */
 }
 
 .model-card p {
-    margin: 8px 0; /* Adjusted margin for prediction/confidence lines */
-    font-size: 1.1em; /* Slightly larger text in cards */
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: var(--text-color-dark);
 }
 
 .model-card .prediction {
     font-weight: bold;
-    color: #00bcd4; /* Cyan color */
-    font-size: 1.2em; /* Make prediction stand out more */
+    color: var(--accent-color);
+    font-size: 1.3em; /* Make prediction stand out more */
+    letter-spacing: 0.02em;
+    margin-bottom: 5px; /* Less space to confidence */
 }
 
 .model-card .confidence {
     font-weight: bold;
-    color: #8bc34a; /* Green color */
-    font-size: 1.15em; /* Make confidence stand out more */
+    color: var(--success-color); /* Green for confidence */
+    font-size: 1.25em;
+    margin-top: 0; /* Align with prediction better */
 }
 
 .model-card .error {
-    color: #ff0000;
+    color: var(--error-color);
     font-weight: bold;
     font-size: 1.1em;
 }
 
 .processed-image {
-    margin-top: 25px; /* More space above the processed image */
+    margin-top: 30px;
     width: 100%;
-    max-width: 280px; /* Smaller max-width for processed images within cards */
+    max-width: 280px; /* Constrain processed image size */
     height: auto;
     overflow: hidden;
     display: flex;
     justify-content: center;
-    border: 2px dashed #e94560; /* Clearer dashed border */
-    border-radius: 8px; /* Rounded corners for processed image */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: 2px dashed var(--header-color); /* Dashed border for processed image */
+    border-radius: var(--border-radius-medium);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .processed-image img {
     max-width: 100%;
     height: auto;
-    display: block; /* Remove extra space below image */
-    border-radius: 6px; /* Slightly smaller border-radius than container */
+    display: block;
+    border-radius: 6px;
 }
 
-/* Responsive adjustments */
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .container {
+        padding: 30px 20px;
+    }
+    h1 {
+        font-size: 2.8em;
+    }
+    h2 {
+        font-size: 1.8em;
+    }
+    .description-text {
+        font-size: 1em;
+    }
+    .results-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        padding: 0 10px;
+    }
+    .model-card {
+        padding: 25px;
+    }
+    .model-card h3 {
+        font-size: 1.4em;
+    }
+    .model-card .prediction {
+        font-size: 1.2em;
+    }
+    .model-card .confidence {
+        font-size: 1.1em;
+    }
+}
+
 @media (max-width: 768px) {
     body {
         padding: 15px;
     }
-    .container {
-        padding: 25px;
-    }
     h1 {
-        font-size: 2em;
+        font-size: 2.2em;
     }
     h2 {
         font-size: 1.6em;
     }
-    .upload-form input[type="file"],
+    .upload-form {
+        padding: 20px;
+        gap: 20px;
+    }
     .upload-form button {
-        max-width: 100%;
-        font-size: 1em;
+        padding: 12px 25px;
+        font-size: 1.1em;
+    }
+    .image-display {
+        padding: 10px;
     }
     .results-grid {
         grid-template-columns: 1fr; /* Stack cards vertically on smaller screens */
+        gap: 25px;
         padding: 0;
     }
-    .image-display img {
-        max-width: 100%; /* Allow original image to take full width on small screens */
+    .model-card {
+        padding: 20px;
+    }
+    .processed-image {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    h2 {
+        font-size: 1.4em;
+    }
+    .description-text {
+        margin-bottom: 25px;
+    }
+    .upload-form input[type="file"] {
+        font-size: 0.95em;
+    }
+    .flashes {
+        font-size: 0.9em;
+        padding: 10px 15px;
     }
     .model-card h3 {
-        font-size: 1.3em;
+        font-size: 1.2em;
     }
     .model-card p {
-        font-size: 1em;
+        font-size: 0.95em;
+    }
+    .model-card .prediction {
+        font-size: 1.1em;
+    }
+    .model-card .confidence {
+        font-size: 1.05em;
     }
 }
