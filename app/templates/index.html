@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marine Object Classifier</title>
+    <!-- Link to Google Fonts for Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
         <h1>Marine Object Classifier</h1>
-        <p>Upload an image of a marine object (Dolphin, Fish, Lobster, Octopus, Sea_horse) to classify it using multiple lightweight models.</p>
+        <div class="description-text">
+            <p>Upload an image of a marine object (Dolphin, Fish, Lobster, Octopus, Sea_horse) to classify it using multiple lightweight models.</p>
+        </div>
 
         {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -21,6 +25,7 @@
             {% endif %}
         {% endwith %}
 
+        <!-- *** THIS IS THE CORRECTED LINE *** -->
         <form method="POST" enctype="multipart/form-data" class="upload-form">
             <input type="file" name="file" accept="image/*" required>
             <button type="submit">Classify Image</button>
