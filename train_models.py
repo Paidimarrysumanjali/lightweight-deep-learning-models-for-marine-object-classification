@@ -1,4 +1,4 @@
-# your_project_root/train_models.py
+ your_project_root/train_models.py
 
 import torch
 import torch.nn as nn
@@ -23,6 +23,7 @@ if not os.path.exists(MODEL_SAVE_DIR):
     os.makedirs(MODEL_SAVE_DIR)
 
 # --- 2. Data Preprocessing ---
+# --- 2. Data Preprocessing (UPDATED FOR BALANCING) ---
 data_transforms = {
     'train': transforms.Compose([
         transforms.RandomResizedCrop(224),
@@ -42,18 +43,43 @@ print("Loading data...")
 image_datasets = {x: datasets.ImageFolder(os.path.join(DATA_DIR, x),
                                           data_transforms[x])
                   for x in ['train', 'valid']}
-dataloaders = {x: DataLoader(image_datasets[x], batch_size=BATCH_SIZE,
-                             shuffle=True, num_workers=4 if DEVICE.type == 'cuda' else 0) # num_workers can be adjusted
-               for x in ['train', 'valid']}
 dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'valid']}
+
+# --- Balance Training Data using WeightedRandomSampler ---
+# 1. Get class counts for the training set
+# This gets the class index for each sample in the training set
+train_targets = image_datasets['train'].targets
+# np.bincount counts occurrences of each class index
+class_counts = np.bincount(train_targets)
+
+# 2. Calculate weights for each class (inverse frequency)
+# Minority classes will have higher weights
+class_weights = 1.0 / torch.tensor(class_counts, dtype=torch.float)
+print(f"Calculated class weights: {class_weights.tolist()}")
+
+# 3. Create a list of weights, one for each sample in the training set
+# Map the class weight back to each individual sample
+sample_weights = class_weights[train_targets]
+
+# 4. Create the WeightedRandomSampler
+# `num_samples` is the total number of samples to draw in an epoch. We keep it as dataset_sizes['train']
+# `replacement=True` allows minority samples to be picked multiple times
+sampler = WeightedRandomSampler(sample_weights, len(sample_weights), replacement=True)
+
+# 5. Create DataLoaders
+dataloaders = {
+    'train': DataLoader(image_datasets['train'], batch_size=BATCH_SIZE, sampler=sampler,
+                        num_workers=4 if DEVICE.type == 'cuda' else 0),
+    'valid': DataLoader(image_datasets['valid'], batch_size=BATCH_SIZE, shuffle=True,
+                        num_workers=4 if DEVICE.type == 'cuda' else 0),
+}
+
 
 # Verify class names order
 print(f"Detected class names: {image_datasets['train'].classes}")
-# Ensure your CLASS_NAMES list above matches this order
 if not all(a == b for a, b in zip(CLASS_NAMES, image_datasets['train'].classes)):
     print("WARNING: Class names order mismatch. Please verify CLASS_NAMES in script.")
-    CLASS_NAMES = image_datasets['train'].classes # Use the order detected by ImageFolder
-
+    CLASS_NAMES = image_datasets['train'].classes
 # --- 3. Training Function ---
 def train_model(model, criterion, optimizer, scheduler, num_epochs=NUM_EPOCHS):
     since = time.time()
